@@ -1,8 +1,17 @@
-// const express = require('express')  // -> CommonJS
-import express from 'express'          // -> ES Module
+import dotenv from "dotenv"
+import cors from "cors"
+import express from 'express'
+import { handleUserSignUp } from "./controllers/user.controllers.js";
+dotenv.config();
 
-const app = express()
-const port = 3000
+const app = express();
+const port = process.env.PORT;
+
+app.use(cors());
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/api/v1/users/signup", handleUserSignUp);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
