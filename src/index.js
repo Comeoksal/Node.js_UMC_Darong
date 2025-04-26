@@ -1,12 +1,22 @@
-const express = require("express");
+import dotenv from "dotenv"
+import cors from "cors"
+import express from 'express'
+import { handleUserSignUp } from "./controllers/user.controllers.js";
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
-app.get("/", (req, res) => {
-  res.send("Good Luck!");
-});
+app.use(cors());
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/api/v1/users/signup", handleUserSignUp);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+  console.log(`Example app listening on port ${port}`)
+})
