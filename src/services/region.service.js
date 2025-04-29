@@ -1,4 +1,4 @@
-import { responseFromRegion } from "../dtos/region.dto";
+import { responseFromRegion } from "../dtos/region.dto.js";
 import {
     addRegion,
     getRegion,
@@ -6,7 +6,7 @@ import {
 
 export const regionUse = async (data) => {
     const joinRegionId = await addRegion({
-        name: data.name,
+        name: data.name
     });
     if (joinRegionId == null) {
         throw new Error("이미 존재하는 지역입니다.");

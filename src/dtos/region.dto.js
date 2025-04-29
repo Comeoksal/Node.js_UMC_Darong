@@ -5,5 +5,9 @@ export const bodyToRegion = (body) => {
 }
 
 export const responseFromRegion = (body) => {
+    const region = body.region;
 
+    return {
+        name: region.name
+    }
 }

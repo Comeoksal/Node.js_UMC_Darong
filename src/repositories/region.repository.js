@@ -14,11 +14,11 @@ export const addRegion = async (data) => {
         }
 
         const [result] = await pool.query(
-            `insert into region (name) values (?)`,
+            `insert into region (name) values (?);`,
             data.name
         )
 
-        return result.insetId;
+        return result.insertId;
     } catch (err) {
         throw new Error(
             `오류 발생. 요청 파라미터 확인. (${err})`
@@ -34,17 +34,15 @@ export const getRegion = async (regionId) => {
 
     try {
         const [region] = await pool.query(
-            `select * from region where id = ?`,
+            `select * from region where id = ?;`,
             regionId
         );
-
-        console.log('getRegion 중 값 : ' + region);
 
         if (region.length == 0) {
             return null;
         }
 
-        return region;
+        return region[0];
     } catch (err) {
         throw new Error(
             `오류 발생. 요청 파라미터 확인. (${err})`
