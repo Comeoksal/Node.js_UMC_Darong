@@ -11,9 +11,6 @@ export const UseStore = async (data) => {
         address: data.address,
         score: data.score,
     })
-    if (joinStoreId == null) {
-        throw new Error("이미 존재하는 가게입니다.");
-    }
 
     const store = await getStore(joinStoreId);
 

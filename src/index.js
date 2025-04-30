@@ -4,6 +4,7 @@ import express from 'express'
 import { handleUserSignUp } from "./controllers/user.controller.js";
 import { handleStore } from "./controllers/store.controller.js";
 import { handleRegion } from "./controllers/region.controller.js";
+import { handleReview } from "./controllers/review.controller.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/v1/users/signup", handleUserSignUp);
 app.use("/api/v1/store", handleStore);
 app.use("/api/v1/region", handleRegion);
+app.use("/api/v1/review", handleReview);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
