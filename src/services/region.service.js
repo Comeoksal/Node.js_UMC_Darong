@@ -4,7 +4,7 @@ import {
     getRegion,
 } from "../repositories/region.repository.js";
 
-export const regionUse = async (data) => {
+export const UseRegion = async (data) => {
     const joinRegionId = await addRegion({
         name: data.name
     });

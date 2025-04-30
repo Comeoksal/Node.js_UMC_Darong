@@ -26,7 +26,6 @@ export const addUser = async (data) => {
                 data.phoneNumber,
             ]
         );
-        console.log("insert result:", result);
 
         return result.insertId;
     } catch (err) {

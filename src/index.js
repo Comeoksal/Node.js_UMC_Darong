@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import express from 'express'
 import { handleUserSignUp } from "./controllers/user.controller.js";
-import { handleStoreReview } from "./controllers/store.controller.js";
+import { handleStore } from "./controllers/store.controller.js";
 import { handleRegion } from "./controllers/region.controller.js";
 
 dotenv.config();
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/v1/users/signup", handleUserSignUp);
-app.use("/api/v1/store/review", handleStoreReview);
+app.use("/api/v1/store", handleStore);
 app.use("/api/v1/region", handleRegion);
 
 app.get('/', (req, res) => {
