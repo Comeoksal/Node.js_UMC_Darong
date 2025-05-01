@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import express from 'express'
 import { handleUserSignUp } from "./controllers/user.controller.js";
-import { handleStore } from "./controllers/store.controller.js";
+import { handleStore, getStoreInfo } from "./controllers/store.controller.js";
 import { handleRegion } from "./controllers/region.controller.js";
 import { handleReview } from "./controllers/review.controller.js";
 
@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.post("/api/v1/users/signup", handleUserSignUp);
 app.post("/api/v1/store", handleStore);
+app.get("/api/v1/store", getStoreInfo);
 app.post("/api/v1/region", handleRegion);
 app.post("/api/v1/review", handleReview);
 
