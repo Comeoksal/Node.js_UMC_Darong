@@ -16,10 +16,10 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/v1/users/signup", handleUserSignUp);
-app.use("/api/v1/store", handleStore);
-app.use("/api/v1/region", handleRegion);
-app.use("/api/v1/review", handleReview);
+app.post("/api/v1/users/signup", handleUserSignUp);
+app.post("/api/v1/store", handleStore);
+app.post("/api/v1/region", handleRegion);
+app.post("/api/v1/review", handleReview);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
