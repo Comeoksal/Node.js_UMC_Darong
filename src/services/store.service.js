@@ -1,4 +1,4 @@
-import { responseFromStore } from "../dtos/store.dto.js"
+import { responseFromStore, responseFromStore_2 } from "../dtos/store.dto.js"
 import {
     addStore,
     getStore,
@@ -11,8 +11,11 @@ export const UseStore = async (data) => {
         address: data.address,
         score: data.score,
     })
+    const message = joinStoreId ? "store save complete" : "store save fail";
+    return responseFromStore({ message });
+}
 
-    const store = await getStore(joinStoreId);
-
-    return responseFromStore({ store });
+export const GetStore = async (data) => {
+    const store = await getStore(data.id);
+    return responseFromStore_2({ store });
 }

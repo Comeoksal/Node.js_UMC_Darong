@@ -7,7 +7,18 @@ export const bodyToStore = (body) => {
     };
 }
 
+export const bodyToStore_2 = (body) => {
+    return {
+        id: body.id,
+    }
+}
 export const responseFromStore = (body) => {
+    return {
+        message: body.message,
+    }
+}
+
+export const responseFromStore_2 = (body) => {
     const store = body.store;
 
     return {
