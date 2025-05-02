@@ -14,7 +14,7 @@ export const bodyToUser = (body) => {
 };
 
 export const responseFromUser = (body) => {
-    const user = body.user[0];
+    const user = body.user;
     const preferences = body.preferences;
 
     return {

@@ -7,7 +7,7 @@ export const addUser = async (data) => {
     try {
         const [confirm] = await pool.query(
             `SELECT EXISTS(SELECT 1 FROM user WHERE email = ?) as isExistEmail;`,
-            data.email
+            [data.email]
         );
 
         if (confirm[0].isExistEmail) {
@@ -42,15 +42,13 @@ export const getUser = async (userId) => {
     const conn = await pool.getConnection();
 
     try {
-        const [user] = await pool.query(`SELECT * FROM user WHERE id = ?;`, userId);
-
-        console.log(user);
+        const [user] = await pool.query(`SELECT * FROM user WHERE id = ?;`, [userId]);
 
         if (user.length == 0) {
             return null;
         }
 
-        return user;
+        return user[0];
     } catch (err) {
         throw new Error(
             `오류가 발생했어요. 요청 파라미터를 확인해주세요. (${err})`
