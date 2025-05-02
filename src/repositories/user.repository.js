@@ -1,39 +1,20 @@
 import { pool } from "../db.config.js";
+import { prisma } from "../db.config.js";
 
 // User 데이터 삽입
 export const addUser = async (data) => {
-    const conn = await pool.getConnection();
-
     try {
-        const [confirm] = await pool.query(
-            `SELECT EXISTS(SELECT 1 FROM user WHERE email = ?) as isExistEmail;`,
-            [data.email]
-        );
-
-        if (confirm[0].isExistEmail) {
+        const user = await prisma.user.findFirst({ where: { email: data.email } });
+        if (user) {
             return null;
         }
 
-        const [result] = await pool.query(
-            `INSERT INTO user (email, name, gender, birth, address, detail_address, phone_number) VALUES (?, ?, ?, ?, ?, ?, ?);`,
-            [
-                data.email,
-                data.name,
-                data.gender,
-                data.birth,
-                data.address,
-                data.detailAddress,
-                data.phoneNumber,
-            ]
-        );
-
-        return result.insertId;
+        const created = await prisma.user.create({ data: data })
+        return created.id;
     } catch (err) {
         throw new Error(
             `오류가 발생했어요. 요청 파라미터를 확인해주세요. (${err})`
         );
-    } finally {
-        conn.release();
     }
 };
 
