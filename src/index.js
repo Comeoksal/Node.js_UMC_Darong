@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import cors from "cors"
 import express from 'express'
+
 import { handleUserSignUp } from "./controllers/user.controller.js";
 import { handleStore, getStoreInfo } from "./controllers/store.controller.js";
 import { handleRegion } from "./controllers/region.controller.js";
