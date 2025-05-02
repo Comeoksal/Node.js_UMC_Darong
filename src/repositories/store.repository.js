@@ -13,15 +13,7 @@ export const addStore = async (data) => {
             ]
         )
         if (confirm[0].isExistStore) {
-            const [getResult] = await pool.query(
-                `select * from store where region_id = ? AND name = ?;`,
-                [
-                    data.region_id,
-                    data.name,
-                ]
-            )
-
-            return getResult[0].id;
+            return null;
         }
 
         const [result] = await pool.query(

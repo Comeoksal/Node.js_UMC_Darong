@@ -11,6 +11,7 @@ export const UseStore = async (data) => {
         address: data.address,
         score: data.score,
     })
+
     const message = joinStoreId ? "store save complete" : "store save fail";
     return responseFromStore({ message });
 }
