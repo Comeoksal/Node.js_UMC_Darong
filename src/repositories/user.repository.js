@@ -31,8 +31,6 @@ export const getUser = async (userId) => {
 // 음식 선호 카테고리 매핑
 export const setPreference = async (userId, foodCategoryId) => {
     try {
-        console.log(Object.keys(prisma));
-        // 예상 출력: [ 'user', 'foodCategory', 'userFavorCategory' ]
         await prisma.userFavorCategory.create({
             data: {
                 userId: userId,
@@ -49,7 +47,7 @@ export const setPreference = async (userId, foodCategoryId) => {
 // 사용자 선호 카테고리 반환
 export const getUserPreferencesByUserId = async (userId) => {
     try {
-        const [preferences] = await prisma.userFavorCategory.findMany({
+        const preferences = await prisma.userFavorCategory.findMany({
             select: {
                 id: true,
                 userId: true,
@@ -63,8 +61,7 @@ export const getUserPreferencesByUserId = async (userId) => {
                 foodCategoryId: "asc",
             }
         })
-
-        return preferences[0];
+        return preferences;
     } catch (err) {
         throw new Error(
             `오류가 발생했어요. 요청 파라미터를 확인해주세요. (${err})`
