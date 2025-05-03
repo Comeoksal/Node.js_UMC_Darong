@@ -17,12 +17,11 @@ export const addStore = async (data) => {
         }
 
         const [result] = await pool.query(
-            `insert into store (region_id, name, address, score) values (?, ?, ?, ?);`,
+            `insert into store (region_id, name, address) values (?, ?, ?);`,
             [
                 data.region_id,
                 data.name,
                 data.address,
-                data.score,
             ]
         )
 
