@@ -6,16 +6,18 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon --exec node src/index.js"
+    "dev": "nodemon --watch src --watch prisma --ignore prisma/node_modules -e js,json,prisma --exec \"prisma generate && node src/index.js\""
   },
   "author": "Darong <keumsiun0503@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.0.0-0",
     "http-status-codes": "^2.3.0",
-    "mysql2": "^3.14.0"
+    "mysql2": "^3.14.0",
+    "prisma": "^6.7.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
