@@ -7,8 +7,8 @@ export const addUser = async (data) => {
         if (user) {
             return null;
         }
-        const created = await prisma.user.create({ data: data })
-        return created.id;
+        const createdUser = await prisma.user.create({ data: data })
+        return createdUser.id;
     } catch (err) {
         throw new Error(
             `addUser에 오류가 발생했어요. 요청 파라미터를 확인해주세요. (${err})`
