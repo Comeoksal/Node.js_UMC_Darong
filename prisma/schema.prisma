@@ -29,6 +29,7 @@ model User {
   userFavorCategories UserFavorCategory[]
   reviews Review[]
 
+
   @@map("user")
 }
 
