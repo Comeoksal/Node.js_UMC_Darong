@@ -3,8 +3,8 @@ import { prisma } from '../db.config.js'
 //Store 데이터 삽입
 export const addStore = async (data) => {
     try {
-        const store = await prisma.store.findFirst({ where: { regionId: data.region_id, name: data.name } })
-        if (store) {
+        const existStore = await prisma.store.findFirst({ where: { regionId: data.region_id, name: data.name } })
+        if (existStore) {
             return null;
         }
         const createdStore = await prisma.store.create({ data: { regionId: data.region_id, name: data.name, address: data.address } })
@@ -26,8 +26,8 @@ export const getStore = async (storeId) => {
                 score: true,
             }
         })
-        // 평균 점수 소수점 1자리로 반올림 (예: 4.3)
-        const avgScore = avgScoreResult._avg.score;
+
+        const avgScore = avgScoreResult._avg.score !== null ? avgScoreResult._avg.score : 0.0;
         const fixedScore = avgScore !== null ? parseFloat(avgScore.toFixed(1)) : null;
         const updatedScore = await prisma.store.update({ where: { id: storeId }, data: { score: fixedScore } })
 

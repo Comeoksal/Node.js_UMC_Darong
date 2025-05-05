@@ -3,8 +3,8 @@ import { prisma } from "../db.config.js";
 // User 데이터 삽입
 export const addUser = async (data) => {
     try {
-        const user = await prisma.user.findFirst({ where: { email: data.email } });
-        if (user) {
+        const existUser = await prisma.user.findFirst({ where: { email: data.email } });
+        if (existUser) {
             return null;
         }
         const createdUser = await prisma.user.create({ data: data })
