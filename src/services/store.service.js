@@ -9,7 +9,6 @@ export const UseStore = async (data) => {
         region_id: data.region_id,
         name: data.name,
         address: data.address,
-        score: data.score,
     })
 
     const message = joinStoreId ? "store save complete" : "store save fail";

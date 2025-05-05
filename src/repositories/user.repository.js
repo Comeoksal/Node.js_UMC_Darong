@@ -3,12 +3,12 @@ import { prisma } from "../db.config.js";
 // User 데이터 삽입
 export const addUser = async (data) => {
     try {
-        const user = await prisma.user.findFirst({ where: { email: data.email } });
-        if (user) {
+        const existUser = await prisma.user.findFirst({ where: { email: data.email } });
+        if (existUser) {
             return null;
         }
-        const created = await prisma.user.create({ data: data })
-        return created.id;
+        const createdUser = await prisma.user.create({ data: data })
+        return createdUser.id;
     } catch (err) {
         throw new Error(
             `addUser에 오류가 발생했어요. 요청 파라미터를 확인해주세요. (${err})`

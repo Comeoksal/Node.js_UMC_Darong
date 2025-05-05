@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `store` MODIFY `score` FLOAT NOT NULL DEFAULT 0.0;
