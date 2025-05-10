@@ -16,7 +16,6 @@
     "dotenv": "^16.4.7",
     "express": "^5.0.0-0",
     "http-status-codes": "^2.3.0",
-    "mysql2": "^3.14.0",
     "prisma": "^6.7.0"
   },
   "devDependencies": {
