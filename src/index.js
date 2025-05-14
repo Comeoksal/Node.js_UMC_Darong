@@ -23,10 +23,22 @@ app.get("/api/v1/store", getStoreInfo);
 app.post("/api/v1/region", handleRegion);
 app.post("/api/v1/review", handleReview);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+const myLogger = (req, res, next) => {
+  console.log("LOGGED");
+  next();
+}
 
+app.use(myLogger);
+
+app.get('/', (req, res) => {
+  console.log("/");
+  res.send('Hello UMC!');
+});
+
+app.get('/hello', (req, res) => {
+  console.log("/hello");
+  res.send('Hello world!');
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
