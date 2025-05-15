@@ -1,4 +1,5 @@
 import { responseFromStore, responseFromStore_2 } from "../dtos/store.dto.js"
+import { DuplicateStoreError } from "../error.js"
 import {
     addStore,
     getStore,
@@ -11,7 +12,7 @@ export const UseStore = async (data) => {
         address: data.address,
     })
 
-    const message = joinStoreId ? "store save complete" : "store save fail";
+    const message = joinStoreId ? "store save complete" : new DuplicateStoreError("이미 존재하는 가게입니다.", data);
     return responseFromStore({ message });
 }
 

@@ -1,4 +1,5 @@
 import { responseFromRegion } from "../dtos/region.dto.js";
+import { DuplicateRegionError } from "../error.js";
 import {
     addRegion,
     getRegion,
@@ -9,7 +10,7 @@ export const UseRegion = async (data) => {
         name: data.name
     });
     if (joinRegionId == null) {
-        throw new Error("이미 존재하는 지역입니다.");
+        throw new DuplicateRegionError("이미 존재하는 지역입니다.", data);
     }
 
     const region = await getRegion(joinRegionId);
