@@ -1,6 +1,8 @@
 import dotenv from "dotenv"
 import cors from "cors"
 import express from 'express'
+import swaggerAutogen from "swagger-autogen";
+import swaggerUiExpress from 'swagger-ui-express'
 
 import { handleUserSignUp } from "./controllers/user.controller.js";
 import { handleStore, getStoreInfo } from "./controllers/store.controller.js";
@@ -12,6 +14,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+/** response setting */
 app.use((req, res, next) => {
   res.success = (success) => {
     return res.json({ resultType: "SUCCESS", error: null, success });
@@ -33,6 +36,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+/**api list */
 app.post("/api/v1/users/signup", handleUserSignUp);
 app.post("/api/v1/store", handleStore);
 app.get("/api/v1/store", getStoreInfo);
@@ -44,6 +48,39 @@ app.get('/', (req, res) => {
   res.send('Hello UMC!');
 });
 
+app.use(
+  "/docs",
+  swaggerUiExpress.serve,
+  swaggerUiExpress.setup({}, {
+    swaggerOptions: {
+      url: "/openapi.json",
+    },
+  })
+);
+
+/**swagger setting */
+app.get("/openapi.json", async (req, res, next) => {
+  // #swagger.ignore = true
+  const options = {
+    openapi: "3.0.0",
+    disableLogs: true,
+    writeOutputFile: false,
+  };
+  const outputFile = "/dev/null"; // 파일 출력은 사용하지 않습니다.
+  const routes = ["./src/index.js"];
+  const doc = {
+    info: {
+      title: "UMC 7th",
+      description: "UMC 7th Node.js 테스트 프로젝트입니다.",
+    },
+    host: "localhost:3000",
+  };
+
+  const result = await swaggerAutogen(options)(outputFile, routes, doc);
+  res.json(result ? result.data : null);
+});
+
+/**logger setting*/
 const myLogger = (req, res, next) => {
   console.log("LOGGED");
   next();
@@ -63,7 +100,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-
+/** listen */
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
