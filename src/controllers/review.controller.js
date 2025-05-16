@@ -7,5 +7,5 @@ export const handleReview = async (req, res, next) => {
     console.log('body : ', req.body);
 
     const review = await UseReview(bodyToReview(req.body));
-    res.status(StatusCodes.OK).json({ result: review });
+    res.status(StatusCodes.OK).success(review);
 }

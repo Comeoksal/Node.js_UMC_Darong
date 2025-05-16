@@ -8,7 +8,7 @@ export const handleStore = async (req, res, next) => {
     console.log("body : ", req.body);
 
     const store = await UseStore(bodyToStore(req.body));
-    res.status(StatusCodes.OK).json({ result: store });
+    res.status(StatusCodes.OK).success(store);
 }
 
 export const getStoreInfo = async (req, res, next) => {
@@ -16,5 +16,5 @@ export const getStoreInfo = async (req, res, next) => {
     console.log("body : ", req.body);
 
     const store = await GetStore(bodyToStore_2(req.body));
-    res.status(StatusCodes.OK).json({ result: store });
+    res.status(StatusCodes.OK).success(store);
 }

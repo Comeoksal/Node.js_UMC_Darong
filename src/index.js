@@ -12,9 +12,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-/**
- * 공통 응답을 사용할 수 있는 헬퍼 함수 등록
- */
 app.use((req, res, next) => {
   res.success = (success) => {
     return res.json({ resultType: "SUCCESS", error: null, success });
@@ -42,6 +39,11 @@ app.get("/api/v1/store", getStoreInfo);
 app.post("/api/v1/region", handleRegion);
 app.post("/api/v1/review", handleReview);
 
+app.get('/', (req, res) => {
+  console.log("/");
+  res.send('Hello UMC!');
+});
+
 const myLogger = (req, res, next) => {
   console.log("LOGGED");
   next();
@@ -49,14 +51,6 @@ const myLogger = (req, res, next) => {
 
 app.use(myLogger);
 
-app.get('/', (req, res) => {
-  console.log("/");
-  res.send('Hello UMC!');
-});
-
-/**
- * 전역 오류를 처리하기 위한 미들웨어
- */
 app.use((err, req, res, next) => {
   if (res.headersSent) {
     return next(err);

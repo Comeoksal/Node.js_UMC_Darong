@@ -7,5 +7,5 @@ export const handleRegion = async (req, res, next) => {
     console.log("body : ", req.body);
 
     const region = await UseRegion(bodyToRegion(req.body));
-    res.status(StatusCodes.OK).json({ result: region });
+    res.status(StatusCodes.OK).success(region);
 }
