@@ -1,5 +1,6 @@
 export class DuplicateUserEmailError extends Error {
     errorCode = "U001";
+    statusCode = 409;
 
     constructor(reason, data) {
         super(reason);
@@ -10,6 +11,7 @@ export class DuplicateUserEmailError extends Error {
 
 export class DuplicateRegionError extends Error {
     errorCode = "U002";
+    statusCode = 409;
 
     constructor(reason, data) {
         super(reason);
@@ -20,6 +22,7 @@ export class DuplicateRegionError extends Error {
 
 export class DuplicateStoreError extends Error {
     errorCode = "U003";
+    statusCode = 409;
 
     constructor(reason, data) {
         super(reason);
@@ -30,6 +33,7 @@ export class DuplicateStoreError extends Error {
 
 export class NoExistStoreError extends Error {
     errorCode = "U004";
+    statusCode = 404;
 
     constructor(reason, data) {
         super(reason);
@@ -40,6 +44,7 @@ export class NoExistStoreError extends Error {
 
 export class DuplicateReviewError extends Error {
     errorCode = "U005";
+    statusCode = 409;
 
     constructor(reason, data) {
         super(reason);
