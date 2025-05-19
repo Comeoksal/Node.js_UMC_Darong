@@ -63,6 +63,28 @@ export const handleUserSignUp = async (req, res, next) => {
               error: {
                 type: "object",
                 properties: {
+                  errorCode: { type: "string", example: "400" },
+                  reason: { type: "string" },
+                  data: { type: "object" }
+                }
+              },
+              success: { type: "object", nullable: true, example: null }
+            }
+          }
+        }
+      }
+    };
+    #swagger.responses[409] = {
+      description: "이메일 중복 응답",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              resultType: { type: "string", example: "FAIL" },
+              error: {
+                type: "object",
+                properties: {
                   errorCode: { type: "string", example: "U001" },
                   reason: { type: "string" },
                   data: { type: "object" }
