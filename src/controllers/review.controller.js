@@ -3,26 +3,27 @@ import { UseReview } from "../services/review.service.js";
 import { bodyToReview } from "../dtos/review.dto.js";
 
 export const handleReview = async (req, res, next) => {
-    console.log("리뷰 추가를 요청했습니다.");
-    console.log('body : ', req.body);
+  console.log("리뷰 추가를 요청했습니다.");
+  console.log('body : ', req.body);
 
-    const review = await UseReview(bodyToReview(req.body));
-    // #region Swagger: 리뷰 추가 API
-    /*
-      #swagger.summary = '리뷰 추가 API';
-      #swagger.requestBody = {
-        required: true,
-        content: {
-          "application/json": {
-            schema: {
-              type: "object",
-              properties: {
-                name: { type: "string" },
-              }
+  const review = await UseReview(bodyToReview(req.body));
+  // #region Swagger: 리뷰 추가 API
+  /*
+    #swagger.summary = '리뷰 추가 API';
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              body: { type: "string", example: "맛있습니다.!!" },
+              score: { type: "float", example: "4.3"},
             }
           }
         }
-      };
+      }
+    };
       #swagger.responses[200] = {
         description: "리뷰 추가 성공 응답",
         content: {
@@ -88,7 +89,7 @@ export const handleReview = async (req, res, next) => {
         }
       }
     };
-    */
-    // #endregion
-    res.status(StatusCodes.OK).success(review);
+  */
+  // #endregion
+  res.status(StatusCodes.OK).success(review);
 }
