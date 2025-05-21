@@ -43,11 +43,7 @@ app.get("/api/v1/store/:storeId", getStoreInfo);
 app.post("/api/v1/region", handleRegion);
 app.post("/api/v1/review", handleReview);
 
-app.get('/', (req, res) => {
-  console.log("/");
-  res.send('Hello UMC!');
-});
-
+/**swagger setting */
 app.use(
   "/docs",
   swaggerUiExpress.serve,
@@ -58,7 +54,6 @@ app.use(
   })
 );
 
-/**swagger setting */
 app.get("/openapi.json", async (req, res, next) => {
   // #swagger.ignore = true
   const options = {

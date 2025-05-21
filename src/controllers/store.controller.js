@@ -18,9 +18,9 @@ export const handleStore = async (req, res, next) => {
           schema: {
             type: "object",
             properties: {
-              region_id: { type: "integer" },
-              name: { type: "string" },
-              address: { type: "string" },
+              region_id: { type: "integer", example: 1 },
+              name: { type: "string", example: "스텔라떡볶이" },
+              address: { type: "string", example: "서울시 성북구 성신여대" },
             }
           }
         }
@@ -104,8 +104,6 @@ export const getStoreInfo = async (req, res, next) => {
       required: true,
       content: {
         "application/json": {
-          
->>>>>>> ad66061d73f34dbd02c57373bee63a0f66ad2691
         }
       }
     };
@@ -123,7 +121,7 @@ export const getStoreInfo = async (req, res, next) => {
                 properties: {
                   name: { type: "string" },
                   address: { type: "string" },
-                  score: {type: "float"},
+                  score: {type: "number", format: "float", example: 4.5},
                 }
               }
             }
