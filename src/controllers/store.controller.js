@@ -18,7 +18,7 @@ export const handleStore = async (req, res, next) => {
           schema: {
             type: "object",
             properties: {
-              region_id: { type: "bigint" },
+              region_id: { type: "integer" },
               name: { type: "string" },
               address: { type: "string" },
             }
@@ -94,22 +94,17 @@ export const handleStore = async (req, res, next) => {
 
 export const getStoreInfo = async (req, res, next) => {
   console.log("가게 조회를 요청했습니다.");
-  console.log("body : ", req.body);
+  console.log("params : ", req.params);
 
-  const store = await GetStore(bodyToStore_2(req.body));
+  const store = await GetStore(bodyToStore_2(req.params));
   // #region Swagger: 가게 조회 API
   /*
     #swagger.summary = '가게 조회 API';
-    #swagger.requestBody = {
+    #swagger.requestParams = {
       required: true,
       content: {
         "application/json": {
-          schema: {
-            type: "object",
-            properties: {
-              id:  {type: "bigint"},
-            }
-          }
+          
         }
       }
     };
