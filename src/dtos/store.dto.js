@@ -6,9 +6,9 @@ export const bodyToStore = (body) => {
     };
 }
 
-export const bodyToStore_2 = (body) => {
+export const bodyToStore_2 = (param) => {
     return {
-        id: body.id,
+        storeId: param.storeId,
     }
 }
 export const responseFromStore = (body) => {

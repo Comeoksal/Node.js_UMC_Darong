@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 /**api list */
 app.post("/api/v1/users/signup", handleUserSignUp);
 app.post("/api/v1/store", handleStore);
-app.get("/api/v1/store", getStoreInfo);
+app.get("/api/v1/store/:storeId", getStoreInfo);
 app.post("/api/v1/region", handleRegion);
 app.post("/api/v1/review", handleReview);
 
@@ -70,8 +70,8 @@ app.get("/openapi.json", async (req, res, next) => {
   const routes = ["./src/index.js"];
   const doc = {
     info: {
-      title: "UMC 7th",
-      description: "UMC 7th Node.js 테스트 프로젝트입니다.",
+      title: "UMC 8th",
+      description: "UMC 8th Node.js 테스트 프로젝트입니다.",
     },
     host: "localhost:3000",
   };

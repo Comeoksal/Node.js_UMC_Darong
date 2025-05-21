@@ -22,7 +22,7 @@ export const UseStore = async (data) => {
 
 export const GetStore = async (data) => {
     try {
-        const store = await getStore(data.id);
+        const store = await getStore(data.storeId);
         return responseFromStore_2({ store });
     } catch (err) {
         // Prisma가 던진 특정 에러를 가로채서 상태 코드 커스터마이징
