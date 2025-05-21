@@ -73,6 +73,7 @@ export const handleReview = async (req, res, next) => {
         "application/json": {
           schema: {
             type: "object",
+
             properties: {
               resultType: { type: "string", example: "FAIL" },
               error: {
