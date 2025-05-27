@@ -31,7 +31,7 @@ export const handleUserSignUp = async (req, res, next) => {
       }
     };
     #swagger.responses[200] = {
-      description: "회원 가입 성공 응답",
+    description: "회원 가입 성공 응답",
       content: {
         "application/json": {
           schema: {
