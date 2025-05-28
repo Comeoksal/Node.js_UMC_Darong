@@ -8,7 +8,7 @@ import { prisma } from "./db.config.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import session from "express-session";
 import passport from "passport";
-import { googleStrategy } from "./auth.config.js";
+import { googleStrategy, kakaoStrategy, githubStrategy, naverStrategy } from "./auth.config.js";
 import { handleUserSignUp } from "./controllers/user.controller.js";
 import { handleStore, getStoreInfo } from "./controllers/store.controller.js";
 import { handleRegion } from "./controllers/region.controller.js";
@@ -17,6 +17,9 @@ import { handleReview } from "./controllers/review.controller.js";
 dotenv.config();
 
 passport.use(googleStrategy);
+passport.use(githubStrategy);
+passport.use(naverStrategy);
+passport.use(kakaoStrategy);
 passport.serializeUser((user, done) => done(null, user.id.toString()));
 passport.deserializeUser(async (id, done) => {
   try {
@@ -86,6 +89,36 @@ app.get(
   "/oauth2/callback/google",
   passport.authenticate("google", {
     failureRedirect: "/oauth2/login/google",
+    failureMessage: true,
+  }),
+  (req, res) => res.redirect("/")
+);
+
+app.get("/oauth2/login/github", passport.authenticate("github"));
+app.get(
+  "/oauth2/callback/github",
+  passport.authenticate("github", {
+    failureRedirect: "/oauth2/login/github",
+    failureMessage: true,
+  }),
+  (req, res) => res.redirect("/")
+);
+
+app.get("/oauth2/login/naver", passport.authenticate("naver"));
+app.get(
+  "/oauth2/callback/naver",
+  passport.authenticate("naver", {
+    failureRedirect: "/oauth2/login/naver",
+    failureMessage: true,
+  }),
+  (req, res) => res.redirect("/")
+);
+
+app.get("/oauth2/login/kakao", passport.authenticate("kakao"));
+app.get(
+  "/oauth2/callback/kakao",
+  passport.authenticate("kakao", {
+    failureRedirect: "/oauth2/login/kakao",
     failureMessage: true,
   }),
   (req, res) => res.redirect("/")
