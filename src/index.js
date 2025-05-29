@@ -20,17 +20,8 @@ passport.use(googleStrategy);
 passport.use(githubStrategy);
 passport.use(naverStrategy);
 passport.use(kakaoStrategy);
-passport.serializeUser((user, done) => done(null, user.id.toString()));
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id: BigInt(id) }, // String → BigInt
-    });
-    done(null, user);
-  } catch (error) {
-    done(error);
-  }
-});
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 const app = express();
 const port = process.env.PORT;
